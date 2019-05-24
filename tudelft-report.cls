@@ -6,6 +6,7 @@
 \newif\if@nativefonts
 \newif\if@print
 \newif\if@roman
+\newif\if@nativemath
 %\newif\if@whitetitle
 % \newif\if@whitelogo
 \DeclareOption{dutch}{\@dutchtrue\@englishfalse}
@@ -13,6 +14,7 @@
 \DeclareOption{english}{\@dutchfalse\@englishtrue}
 \DeclareOption{nativefonts}{\@nativefontstrue}
 \DeclareOption{print}{\@printtrue}
+\DeclareOption{nativemath}{\@nativemathtrue}
 %\DeclareOption{whitetitle}{\@whitetitletrue}
 % \DeclareOption{whitelogo}{\@whitelogotrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
@@ -145,7 +147,6 @@
 \else
     %% Apart from Bookman Old Style and Arial, we use Courier New for monospace
     %% and Cambria for math.
-    \RequirePackage{unicode-math}
     \setmainfont[
         Path = tud_fonts/,
         Extension = .ttf,
@@ -167,10 +168,14 @@
         ItalicFont = *-ItalicMT,
         BoldItalicFont = *-BoldItalicMT
     ]{CourierNewPS}
+    \if@nativemath
+    \else
+    \RequirePackage{unicode-math}
     \setmathfont[
         Path = tud_fonts/,
         Extension = .ttf
     ]{CambriaMath}
+    \fi
     %% The default style for text is Tahoma (sans-serif).
 %    \setlength\@largetitlesize{96pt}
     \renewcommand*\familydefault{\sfdefault}
