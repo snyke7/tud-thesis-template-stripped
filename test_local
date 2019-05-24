@@ -1,0 +1,37 @@
+#!/bin/bash
+xelatex_cmd="$(which xelatex)"
+if [ $? -ne 0 ]; then
+   echo "Error: Could not find xelatex."
+   exit 1
+fi
+
+xetexpile () {
+   "$xelatex_cmd" -halt-on-error -interaction=nonstopmode "$1"
+}
+
+bibtex_cmd="$(which bibtex)"
+if [ $? -ne 0 ]; then
+   echo "Error: Could not find bibtex."
+   exit 2
+fi
+
+TEXMFHOME="$HOME/is/not/texmf/home"
+testpath="test/"
+
+cp -u "tudelft-report.bst" "$testpath"
+cp -u "tudelft-report.cls" "$testpath"
+cp -uR "tud_images" "$testpath"
+cp -uR "tud_fonts" "$testpath"
+
+cd "$testpath"
+log="../test.log"
+testfile="report"
+rm -f "$logfile"
+xetexpile "$testfile" >> "$log" && "$bibtex_cmd" "$testfile" >> "$log" && xetexpile "$testfile" >> "$log" && xetexpile "$testfile" >> "$log"
+if [ $? -eq 0 ]; then
+   cd -
+   echo "Local compilation succeeded."
+else
+   cd -
+   echo "Local compilation failed, see test.log."
+fi

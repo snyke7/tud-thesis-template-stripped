@@ -1,0 +1,13 @@
+*.aux
+*.bbl
+*.blg
+*.loc
+*.log
+*.out
+*.pdf
+*.soc
+*.toc
+tud_fonts/*
+tud_images/*
+tudelft-report.cls
+tudelft-report.bst
