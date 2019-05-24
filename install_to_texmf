@@ -1,0 +1,26 @@
+#!/bin/bash
+TEXMF=$(kpsewhich -var-value TEXMFHOME)
+texmf_result="$?"
+if [ "$texmf_result" -ne 0 ]; then
+   echo "Error: Could not detect TEXMFHOME, command failed with $texmf_result"
+   exit 1
+fi
+if [ -z "$TEXMF" ]; then
+   echo "Error: TEXMFHOME was not set."
+   exit 2
+fi
+bstpath="$TEXMF/bibtex/bst/local/"
+clspath="$TEXMF/tex/latex/local/"
+imgpath="$TEXMF/tex/local/images/"
+fontpath="$TEXMF/fonts/truetype/local/"
+
+mkdir -pv "$bstpath"
+mkdir -pv "$clspath"
+mkdir -pv "$imgpath"
+mkdir -pv "$fontpath"
+
+cp -uv "tudelft-report.bst" "$bstpath"
+cp -uv "tudelft-report.cls" "$clspath"
+cp -uvR "tud_images" "$imgpath"
+cp -uvR "tud_fonts" "$fontpath"
+
