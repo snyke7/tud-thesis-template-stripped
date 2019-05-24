@@ -174,7 +174,7 @@
     %% The default style for text is Tahoma (sans-serif).
 %    \setlength\@largetitlesize{96pt}
     \renewcommand*\familydefault{\sfdefault}
-    %% The default style for titles is Bookman Old Style (serif). 
+    %% The default style for titles is Bookman Old Style (serif).
     \def\titlefont{\tudsffamily}
     \def\largetitlefont{\tudtitlefamily}
     \def\titleshape{}
@@ -221,7 +221,7 @@
 \def\@pagecolor{tudelft-cyan}
 %\if@whitetitle
 %  \def\titlecolor{tudelft-white}
-%\else   
+%\else
 %  \def\titlecolor{tudelft-black}
 %\fi
 
@@ -237,29 +237,39 @@
 \geometry{a4paper,hscale=0.75,vscale=0.8}
 
 %% Redefine the title command to accept an optional subtitle.
-\renewcommand*\title[2][tudelft-white]{%
-%    \def\@subtitle{#1}%
-    \def\@titlecolor{#1}%
-    \def\@title{#2}%
-    %% Add the title to the PDF meta data.
-    \hypersetup{pdftitle=#2}%
+\def\@titlecolor{tudelft-white}
+\def\@subtitlecolor{tudelft-white}
+\def\@authorcolor{tudelft-white}
+\def\@afilcolor{tudelft-white}
+\newcommand*\covertitlecolor[1]{
+  \def\@titlecolor{#1}
 }
-\newcommand*\subtitle[2][tudelft-white]{%
-%    \def\@subtitle{#1}%
-    \def\@subtitlecolor{#1}%
-    \def\@subtitle{#2}%
+\newcommand*\coversubtitlecolor[1]{
+  \def\@subtitlecolor{#1}
+}
+\newcommand*\coverauthorcolor[1]{
+  \def\@authorcolor{#1}
+}
+\newcommand*\coverafilcolor[1]{
+  \def\@afilcolor{#1}
+}
+\renewcommand*\title[1]{%
+    \def\@title{#1}%
+    %% Add the title to the PDF meta data.
+    \hypersetup{pdftitle=#1}%
+}
+\newcommand*\subtitle[1]{%
+    \def\@subtitle{#1}%
     %% Add the title to the PDF meta data.
 %    \hypersetup{pdftitle=#3}%
 }
 %% Redefine the author command to add the name to the PDF meta data.
-\renewcommand*\author[2][tudelft-white]{%
-    \def\@authorcolor{#1}%
-    \def\@author{#2}%
-    \hypersetup{pdfauthor=#2}%
+\renewcommand*\author[1]{
+    \def\@author{#1}%
+    \hypersetup{pdfauthor=#1}%
 }
 %% The affiliation is shown in the blue box on the front cover.
-\newcommand*\affiliation[2][tudelft-white]{\def\@afilcolor{#1}%
-                                           \def\@affiliation{#2}}
+\newcommand*\affiliation[1]{\def\@affiliation{#1}}
 %% The coverimage command is used to specify the filename of the optional cover
 %% image.
 \newcommand*\coverimage[1]{\def\@cover@image{#1}}
@@ -432,7 +442,7 @@
           \addtolength\@cover@fronttextheight{-4\@cover@margin}
           \coordinate (tcorner) at ($(top left)+(2\@cover@margin,-2\@cover@margin)$);
           \coordinate (front top left) at (tcorner);
-%%          \coordinate (back top left) at ($(tcorner)+(-\@cover@backboxwidth,\@cover@backboxheight)$);     
+%%          \coordinate (back top left) at ($(tcorner)+(-\@cover@backboxwidth,\@cover@backboxheight)$);
           \node at (front top left)[anchor=north west,inner sep=\@cover@margin]{
              \begin{minipage}[t][\@cover@fronttextheight]{\@cover@fronttextwidth}
                  %% Print the title and optional subtitle at the top in white.
@@ -440,16 +450,16 @@
                     \ifx\@subtitle\undefined\else
 %                     \\[3mm]
                      \vfill
-                     
+
                      {\titlefont\color{\@subtitlecolor}\fontsize{52}{52}\selectfont\@subtitle}
                    \fi
                  %% Print the author.
                    \vfill
-                  
+
                    {\titlefont\color{\@authorcolor}\fontsize{52}{52}\selectfont\@author}
                    \ifx\@cover@text\undefined\else
                      \vfill
-                     
+
                      {\titlefont\color{\@covertextcolor}\fontsize{18}{18}\selectfont\@cover@text}
                    \fi
              \end{minipage};
@@ -514,7 +524,7 @@
 %                  \end{minipage}
 %              };
 %          \fi
-         
+
        \fi
     \end{tikzpicture}
     %% Restore the margins and turn the page white again.
@@ -654,4 +664,3 @@
     linkcolor=title,
     urlcolor=title
 }
-
