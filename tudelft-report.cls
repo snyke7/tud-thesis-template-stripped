@@ -106,7 +106,10 @@
 %      \RequirePackage{lato}
       \RequirePackage{helvet}
       \RequirePackage[thin]{roboto}
+      \if@nativemath
+      \else
       \RequirePackage{fourier}
+      \fi
     \else
       \RequirePackage[thin]{roboto}
 %      \RequirePackage[default]{lato}
