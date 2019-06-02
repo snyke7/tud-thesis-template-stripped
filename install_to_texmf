@@ -23,4 +23,5 @@ cp -uv "tudelft-report.bst" "$bstpath"
 cp -uv "tudelft-report.cls" "$clspath"
 cp -uvR "tud_images" "$imgpath"
 cp -uvR "tud_fonts" "$fontpath"
+cp -uv "roboto.sty" "$clspath" #$TEXMF/tex/latex/roboto/"
 

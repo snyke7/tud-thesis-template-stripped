@@ -20,6 +20,7 @@ testpath="test/"
 
 cp -u "tudelft-report.bst" "$testpath"
 cp -u "tudelft-report.cls" "$testpath"
+cp -u "roboto.sty" "$testpath"
 cp -uR "tud_images" "$testpath"
 cp -uR "tud_fonts" "$testpath"
 
