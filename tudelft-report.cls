@@ -612,8 +612,8 @@
 
 %% Chapter titles have the same layout as parts.
 \titleformat{\chapter}[display]
-    {\flushright\largetitlestyle}
-    {\fontsize{96}{96}\selectfont\thechapter}
+    {\flushright}
+    {\largetitlestyle\fontsize{96}{96}\selectfont\thechapter}
     {0pt}
     {\chaptitlestyle\Huge\color{title}}
 \titlespacing{\chapter}{0pt}{0pt}{2\baselineskip}
